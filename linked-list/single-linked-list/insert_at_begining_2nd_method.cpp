@@ -1,5 +1,4 @@
 
-
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -7,25 +6,16 @@ struct node {
     int data;
     struct node * link;
 };
-
-void traverse (struct node * head)
+void insert(struct node ** head)    //pointet to a pointer
 {
+    struct node *ptr = (struct node*)malloc(sizeof(struct node));
+    ptr-> data = 75;
+    ptr-> link = NULL;
+    ptr->link = *head;
+    *head = ptr;
 
-    struct node * temp = (struct node *) malloc(sizeof(struct node));
-    temp -> data = 70;
-    temp -> link = NULL;
+    //return head;
 
-    if(head == NULL)
-    {
-        printf("Empty\n");
-    }
-    struct node * ptr = head;
-
-    while(ptr -> link != NULL)
-    {
-        ptr = ptr ->link;
-    }
-    ptr -> link = temp;
 }
 int main ()
 {
@@ -44,8 +34,13 @@ int main ()
     head -> link -> link = current;
     current -> link = NULL;
 
-    //printf("%d\n",current->data);
+    insert(&head);
+    current = head;
 
-    traverse(head);
+    while(current != NULL)
+    {
+        printf("%d\n",current->data);
+        current = current->link;
+    }
 
 }
