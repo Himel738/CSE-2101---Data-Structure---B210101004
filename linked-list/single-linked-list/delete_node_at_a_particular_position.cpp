@@ -5,8 +5,9 @@ struct node {
     int data;
     struct node * link;
 };
-struct node * delet(struct node *head)
+struct node * delet(struct node *head,int position)
 {
+    int count=0;
     if(head->link==NULL)
     {
         free(head);
@@ -14,23 +15,25 @@ struct node * delet(struct node *head)
     }
     else
     {
-        struct node * ptr = head;
-        struct node * ptr2 = head;
 
-        while(ptr->link!= NULL)
+        struct node * ptr=head;
+        struct node * ptr2=head;
+
+        while(ptr->link != NULL)
         {
+            count++;
             ptr2 = ptr;
-            ptr = ptr -> link;
+            ptr = ptr->link;
+            if(count==position-1)
+            {
+                ptr2->link = ptr->link;
+                free(ptr);
+                ptr=NULL;
+                break;
+            }
         }
-
-        ptr2 -> link = NULL;
-        free(ptr);
-        ptr = NULL;
     }
-
     return head;
-
-
 }
 int main ()
 {
@@ -49,7 +52,7 @@ int main ()
     head -> link -> link = current;
     current -> link = NULL;
 
-    current = delet(head);
+    current = delet(head,2);
 
     while(current != NULL)
     {
@@ -57,4 +60,5 @@ int main ()
         current = current -> link;
     }
 }
+
 
