@@ -6,6 +6,14 @@ struct node {
    int data;
    struct node * next;
 };
+void print(struct node * ptr)
+{
+    while(ptr != NULL)
+    {
+        printf("%d\n",ptr->data);
+        ptr = ptr -> next;
+    }
+}
 struct node * add(struct node * head,int data)
 {
     struct node * ptr = (struct node *) malloc(sizeof(struct node));
@@ -37,11 +45,14 @@ int main ()
     ptr = head;
     head = add_end(head,60);
     head = add_end(head,80);
+    head = add_end(head,90);
 
 
-    while(ptr != NULL)
-    {
-        printf("%d\n",ptr->data);
-        ptr = ptr -> next;
-    }
+    print(ptr);
+
+    head = add_end(head,100);
+
+    printf("\n\n\n");
+
+    print(ptr);
 }
