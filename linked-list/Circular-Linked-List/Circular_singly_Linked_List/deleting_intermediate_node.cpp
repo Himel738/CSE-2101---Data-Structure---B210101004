@@ -55,7 +55,7 @@ int main ()
     tail = add_end(tail,head,60);
     tail = add_end(tail,head,70);
 
-    delete_intermediate_node(head,tail,2);
+    delete_intermediate_node(head,tail,3);
 
     tail=tail -> link;
 
