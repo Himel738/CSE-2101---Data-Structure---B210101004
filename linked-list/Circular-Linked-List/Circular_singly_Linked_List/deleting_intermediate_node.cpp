@@ -1,5 +1,4 @@
 
-
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -25,17 +24,27 @@ struct node * add_end(struct node * tail,struct node * head,int data)
 
     return nodes;
 };
-struct node * delete_last_node(struct node * head,struct node * tail)
+void delete_intermediate_node(struct node * head,struct node * tail,int position)
 {
     struct node * ptr = head;
-    while(ptr-> link != tail)
+    int count = 0;
+
+    while(ptr != tail)
     {
-            ptr = ptr -> link;
+        count++;
+
+        if(count ==(position-1))
+        {
+            struct node * next = ptr -> link;
+            ptr -> link = next -> link;
+
+            free(next);
+            next ->link = NULL;
+            break;
+        }
+        ptr = ptr -> link;
     }
-    ptr->link = tail -> link;
-    free(tail);
-    tail = ptr;
-    return tail;
+
 };
 int main ()
 {
@@ -46,7 +55,7 @@ int main ()
     tail = add_end(tail,head,60);
     tail = add_end(tail,head,70);
 
-    tail = delete_last_node(head,tail);
+    delete_intermediate_node(head,tail,2);
 
     tail=tail -> link;
 
