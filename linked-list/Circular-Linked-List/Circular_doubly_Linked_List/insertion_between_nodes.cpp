@@ -30,6 +30,31 @@ struct node * add_end(struct node * tail,struct node * head,int data)
     return nodes;
 };
 
+void add_middle(struct node * tail,struct node * head,int data,int position)
+{
+     struct node * nodes = (struct node *) malloc(sizeof(struct node));
+    nodes -> data = data;
+
+
+    int count = 0;
+
+    do
+    {
+       count++;
+       if(count==position)
+       {
+         nodes -> prev = tail;
+         nodes -> next = tail-> next;
+         tail -> next -> prev = nodes;
+         tail -> next = nodes;
+         break;
+       }
+        tail = tail -> next;
+    }
+
+    while(tail != head);
+};
+
 int main ()
 {
     struct node * head = (struct node *) malloc(sizeof(struct node));
@@ -41,6 +66,10 @@ int main ()
     tail = add_end(tail,head,70);
     tail = add_end(tail,head,80);
     tail = head;
+
+    add_middle(tail,head,100,1);
+    add_middle(tail,head,200,1);
+    add_middle(tail,head,500,4);
 
     do
     {
