@@ -63,8 +63,8 @@ int main ()
       tail = add_end(tail,head,80);
 
       delete_intermediate(head,2);
-      delete_intermediate(head,2);
-      delete_intermediate(head,3);
+      //delete_intermediate(head,2);
+
 
 
      if(tail != NULL)
