@@ -33,6 +33,7 @@ struct node * insert_node(struct node * head,float co,int expo)
             temp -> link = tail;
             return head;
         }
+
         temp = temp -> link;
         }
     }
