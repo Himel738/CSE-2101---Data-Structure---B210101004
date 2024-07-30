@@ -1,3 +1,5 @@
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -7,6 +9,27 @@ struct node
     float co;
     int expo;
 };
+void print(struct node * head)
+{
+    struct node * tail = NULL;
+    tail = head;
+
+   while(tail != NULL)
+   {
+       printf( "(%.1fx^%d)",tail-> co,tail->expo);
+       tail = tail -> link;
+       if(tail != NULL)
+       {
+           printf(" + ");
+       }
+       else
+       {
+           printf("\n");
+       }
+   }
+
+}
+
 struct node * insert_node(struct node * head,float co,int expo)
 {
     struct node * tail = (struct node *) malloc(sizeof(struct node ));
@@ -15,7 +38,7 @@ struct node * insert_node(struct node * head,float co,int expo)
     tail -> co = co;
     tail -> expo = expo;
 
-    if(head == NULL)
+    if(head == NULL || expo > head -> expo)
     {
        tail -> link = head;
        head = tail;
@@ -57,26 +80,35 @@ struct node * create(struct node * head)
     }
     return head;
 }
+void polynomial_add(struct node *head , struct node * head2)
+{
+    struct node * ptr1 = head;
+    struct node * ptr2 = head2;
+    struct node * head3 = NULL;
+
+    while(ptr1 != NULL)
+    {
+        while(ptr2 != NULL)
+        {
+            head3 = insert_node(head3,ptr1->co * ptr2 -> co, ptr1-> expo + ptr2 -> expo);
+            ptr2 = ptr2 -> link;
+        }
+        ptr2 = head2;
+        ptr1 = ptr1 -> link;
+    }
+    printf("Multiplication Polynomial \n");
+        print(head3);
+}
+
 int main ()
 {
    struct node * head = NULL;
-   struct node * tail = NULL;
+   struct node * head2 = NULL;
 
+   printf("Enter the First polynomia\n");
    head = create(head);
+   printf("Enter the Second polynomia\n");
+   head2 = create(head2);
+   polynomial_add(head,head2);
 
-   tail = head;
-
-   while(tail != NULL)
-   {
-       printf( "(%.1fx^%d)",tail-> co,tail->expo);
-       tail = tail -> link;
-       if(tail != NULL)
-       {
-           printf(" + ");
-       }
-       else
-       {
-           printf("\n");
-       }
-   }
 }
