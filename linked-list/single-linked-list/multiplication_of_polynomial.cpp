@@ -56,6 +56,13 @@ struct node * insert_node(struct node * head,float co,int expo)
             temp -> link = tail;
             return head;
         }
+        else if(temp -> expo >= expo && temp -> link -> expo <= expo)
+        {
+            tail -> link = temp -> link;
+            temp -> link = tail;
+
+            return head;
+        }
         temp = temp -> link;
         }
     }
