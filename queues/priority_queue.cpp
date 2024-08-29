@@ -8,10 +8,22 @@ struct node
     int data;
     struct node * link;
 }   *top = NULL;
+int isEmpty()
+{
+    if(top==NULL);
+        return 1;
+    else
+        return 0;
+}
 
 void enqueue(int priority,int data)
 {
     struct node * new_node = (struct node *) malloc(sizeof(struct node));
+    if(new_node == NULL)
+    {
+        printf("Memory Not Avilable\n");
+        exit(1);
+    }
     new_node->priority = priority;
     new_node ->data = data;
     new_node -> link = NULL;
@@ -45,6 +57,11 @@ void enqueue(int priority,int data)
 
 void dequeue ()
 {
+    if(isEmpty())
+    {
+        priintf("Queue Underflow\n");
+        exit(1);
+    }
     int data;
     data = top -> data;
     struct node * temp = top;
@@ -59,6 +76,12 @@ void dequeue ()
 void print()
 {
     struct node * temp = top;
+
+    if(isEmpty())
+    {
+        priintf("Queue Underflow\n");
+        exit(1);
+    }
 
     while(temp != NULL)
     {
