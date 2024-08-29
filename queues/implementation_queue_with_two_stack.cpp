@@ -66,21 +66,32 @@ void dequeue(struct node ** stack1,struct node ** stack2)
 
 int main ()
 {
+    int choice,data;
     struct node * stack1 = NULL;
     struct node * stack2 = NULL;
+    while(1)
+    {
+        printf("1.Insert\n");
+        printf("2.Delete\n");
+        printf("3.Quit\n");
 
-    enqueue(&stack1,5);
-    enqueue(&stack1,10);
-    enqueue(&stack1,15);
-    enqueue(&stack1,25);
-    enqueue(&stack1,30);
-    enqueue(&stack1,155);
+        printf("Enter Your Choice: \n");
+        scanf("%d",&choice);
 
-    dequeue(&stack1,&stack2);
-    dequeue(&stack1,&stack2);
-    dequeue(&stack1,&stack2);
-    dequeue(&stack1,&stack2);
-    dequeue(&stack1,&stack2);
-    dequeue(&stack1,&stack2);
+        switch(choice)
+        {
+        case 1:
 
+            printf("Enter your Data:");
+            scanf("%d",&data);
+            enqueue(&stack1,data);
+            break;
+        case 2:
+            dequeue(&stack1,&stack2);
+            break;
+        case 3:
+            exit(1);
+            break;
+        }
+    }
 }
