@@ -1,4 +1,5 @@
 
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -38,26 +39,41 @@ struct node *create_tree()
     }
 };
 
-struct node * create_node(int data)
-{
-    struct node * new_node = (struct node *)malloc(sizeof(struct node));
-    new_node->left = NULL;
-    new_node->data = data;
-    new_node->right = NULL;
-
-    return new_node;
-};
-
-struct node * insertion_element(struct node * root,int key)
+struct node * case1 (struct node * root,struct node * ptr,struct node * par)
 {
     if(root == NULL)
-        root = create_node(key);
-    else if(key < root -> data)
-        root -> left = insertion_element(root -> left , key);
-    else if(key > root -> data)
-        root -> right = insertion_element(root -> right,key);
+        root = NULL;
+    else if(ptr == par -> left)
+        par -> left = NULL;
     else
-        printf("Duplicate Key\n");
+        par -> right = NULL;
+
+    free(ptr);
+
+    return root;
+};
+
+
+struct node * deletion(struct node * root,int key)
+{
+    struct node *ptr,*par;
+    ptr = root;
+    par == NULL;
+
+    while(ptr != NULL)
+    {
+        if(key == ptr -> data)
+            break;
+        par = ptr;
+
+        if(key < ptr -> data)
+            ptr = ptr -> left;
+        else
+            ptr = ptr -> right;
+    }
+
+    if(ptr -> left == NULL && ptr -> right == NULL)
+        root = case1(root,ptr,par);
     return root;
 };
 
@@ -73,9 +89,7 @@ void print_BST(struct node * root)
 int main()
 {
     struct node *root = create_tree();
-    root = insertion_element(root,45);
-
+    root = deletion(root,45);
     print_BST(root);
-
 }
 
