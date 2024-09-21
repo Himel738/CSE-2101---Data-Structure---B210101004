@@ -1,5 +1,6 @@
 
 
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -39,6 +40,16 @@ struct node *create_tree()
     }
 };
 
+struct node * leftrotate(struct node * a)
+{
+    struct node * b = a -> right;
+    a -> right = b -> left;
+    b -> left = a;
+
+    return b;
+
+};
+
 struct node * rightrotate(struct node * b)
 {
     struct node * a = b -> left;
@@ -48,7 +59,6 @@ struct node * rightrotate(struct node * b)
     return a;
 
 };
-
 void print_BST(struct node * root)
 {
     if(root == NULL)
@@ -61,7 +71,11 @@ void print_BST(struct node * root)
 int main()
 {
     struct node *root = create_tree();
+     root -> left -> left = leftrotate(root -> left-> left);
      root -> left = rightrotate(root -> left);
-     printf("%d",root -> left -> data);
+
+     printf("%d ",root ->left -> data);
+     printf("%d ",root -> left -> left -> data);
+
 }
 
