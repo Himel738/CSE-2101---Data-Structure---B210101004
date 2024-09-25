@@ -73,6 +73,22 @@ struct node * rightrotate(struct node * b)
     return a;
 };
 
+struct node * balance(struct node * n,int bf , int key)
+{
+    if(bf>1)
+    {
+        if(key > n -> left->data)
+            n -> left = leftrotate(n -> left);
+        return rightrotate(n);
+    }
+    if(bf < -1)
+    {
+        if(key < n -> right -> data)
+            n -> right = rightrotate(n -> right);
+        return leftrotate(n);
+    }
+};
+
 struct node *delete_node(struct node * root,int key)
 {
     if(root == NULL)
@@ -110,10 +126,12 @@ struct node *delete_node(struct node * root,int key)
             root -> right = delete_node(root -> right, temp -> data);
         }
     }
+
     if(root == NULL)
         return root;
 
-    root -> height = 1 + max(height(root -> left),height(root -> right));
+    //root -> height = 1 + max(height(root -> left),height(root -> right));
+    //printf("%d\n",root -> height);
     int bf = getbalanceF(root);
 
     if(bf>1)
@@ -133,6 +151,30 @@ struct node *delete_node(struct node * root,int key)
 
 };
 
+struct node *insert(struct node * root,int key)
+{
+    if(root == NULL)
+        return (create_node(key));
+    if(key < root -> data)
+        root -> left = insert(root -> left,key);
+    else if(key > root -> data)
+        root -> right = insert(root -> right,key);
+    else
+        return root;
+
+    int left = height(root -> left);
+    int right = height (root -> right);
+
+    if(left > right)
+        root -> height = 1 + left;
+    else
+        root -> height = 1 + right;
+
+    int balanceF = getbalanceF(root);
+
+    return balance(root,balanceF,key);
+};
+
 void print_preorder(struct node * root)
 {
     if(root == NULL)
@@ -147,17 +189,18 @@ int main ()
 {
     struct node * root = NULL;
 
-    root = create_node(56);
-    root -> left = create_node(45);
-    root -> left -> left = create_node(30);
-    root -> left -> right = create_node(50);
-    root -> left -> left -> left = create_node(7);
-    root -> left -> left -> right = create_node(35);
-    root -> right = create_node(80);
-    root -> right -> right = create_node(90);
+    root = insert(root,25);
+    root = insert(root,10);
+    root = insert(root,80);
+    root = insert(root,63);
+    root = insert(root,65);
 
-    root = delete_node(root,45);
+    root = delete_node(root,10);
 
     print_preorder(root);
+    printf("\n");
+
+    printf("%d\n",root -> left -> right -> height);
+
 
 }
