@@ -130,7 +130,7 @@ struct node *delete_node(struct node * root,int key)
     if(root == NULL)
         return root;
 
-    //root -> height = 1 + max(height(root -> left),height(root -> right));
+    root -> height = 1 + max(height(root -> left),height(root -> right));
     //printf("%d\n",root -> height);
     int bf = getbalanceF(root);
 
