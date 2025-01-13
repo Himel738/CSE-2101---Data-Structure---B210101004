@@ -6,6 +6,7 @@ void print(int a[],int n)
     {
         cout << a[i] << " ";
     }
+    cout << endl;
 }
 
 int partition(int a[],int low,int high)
@@ -18,10 +19,10 @@ int partition(int a[],int low,int high)
         if(a[j] < pivot)
         {
             i++;
-
             swap(a[j],a[i]);
         }
     }
+    
     i++;
     swap(a[i],a[high]);
 
@@ -32,10 +33,13 @@ void quick_sort(int a[], int low,int high)
 {
      if(low < high)
      {
+        
         int pivotindex = partition(a,low,high);
-
+        //print(a,5);
         quick_sort(a,low,pivotindex-1);
+        print(a,5);
         quick_sort(a,pivotindex+1,high);
+        print(a,5);
      }
 }
 
@@ -52,5 +56,5 @@ int main ()
     }
 
     quick_sort(a,0,n-1);
-    print(a,n);
+    //print(a,n);
 }
