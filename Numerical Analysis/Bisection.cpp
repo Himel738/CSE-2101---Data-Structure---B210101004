@@ -12,7 +12,7 @@ double bisection( double a,double b,double tolerance)
 
     while(1)
     {
-    double currentmid = (a+b) / 2; //cout << currentmid << endl;
+    double currentmid = (a+b) / 2.0; //cout << currentmid << endl;
 
         if (f(currentmid) == 0 || abs(f(currentmid)) <= tolerance)
         {
