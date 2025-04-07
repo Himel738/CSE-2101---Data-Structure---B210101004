@@ -20,7 +20,7 @@ double interpolation(vector<vector<double>> &a,double p,int n)
    {
     term*=(p-(i-1));
     term2 = term / factorial(i);
-    result+= term2*a[i][0]; 
+    result+= term2*a[i][0];
    }
 
    return result;
